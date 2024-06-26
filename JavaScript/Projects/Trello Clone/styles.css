@@ -1,0 +1,113 @@
+/* Global styles */
+* {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header styles */
+header {
+    background-color: rgb(3, 84, 116);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Main content area styles */
+main {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    outline: none;
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+/* Column styles */
+.column {
+    border: 0.5px solid rgba(149, 134, 134, 0.83);
+    min-height: 300px;
+    min-width: 300px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    align-items: center;
+    gap: 20px;
+    flex-grow: 1;
+    background-color: aliceblue;
+    border-radius: 5px;
+}
+
+/* Column header styles */
+.column > h3 {
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 1px solid rgb(169, 145, 145);
+    width: 100%;
+}
+
+/* Column paragraph styles */
+.column > p {
+    padding: 8px;
+    border-radius: 2px;
+    background-color: rgb(3, 84, 116);
+    text-align: center;
+    width: 100%;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Column form input styles */
+.column > form > input {
+    padding: 10px;
+    width: 100%;
+    outline: 0.5px solid rgb(189, 174, 174);
+    border: none;
+    border-radius: 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .column {
+        min-width: calc(100% - 40px);
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 14px;
+    }
+
+    .column {
+        padding: 10px;
+    }
+
+    .column > h3 {
+        font-size: 20px;
+    }
+
+    .column > p {
+        font-size: 14px;
+    }
+
+    .column > form > input {
+        padding: 8px;
+    }
+}
