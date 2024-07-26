@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- coding by Gogila._ -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form | @Gogila._</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="../Styling/signup.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="signup-box">
+      <div class="signup-header">
+        <span>Sign Up</span>
+      </div>
+
+      <form id="signupForm">
+        <div class="input_box">
+          <input type="text" id="user" class="input-field" name="name" required>
+          <label for="user" class="label">Username</label>
+          <i class='bx bxs-user icon'></i>
+        </div>
+
+        <div class="input_box">
+          <input type="email" id="email" class="input-field" name="email" required>
+          <label for="email" class="label">Email</label>
+          <i class='bx bxs-envelope icon'></i>
+        </div>
+
+        <div class="input_box">
+          <input type="password" id="pass" class="input-field" name="password" required oninput="checkPasswordStrength(this.value)">
+          <label for="pass" class="label">Password</label>
+          <i class='bx bxs-lock-alt icon' id="togglePassword"></i>
+        </div>
+
+        <div id="passwordStrength" class="error-message"></div>
+
+        <div class="remember-forgot">
+          <label>
+            <input type="checkbox" required> I agree to the <a href="#">terms and conditions</a>
+          </label>
+        </div>
+
+        <div class="input_box">
+          <input type="submit" class="input-submit" value="Sign Up">
+        </div>
+
+        <div class="register">
+          <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const togglePassword = document.querySelector("#togglePassword");
+      const password = document.querySelector("#pass");
+
+      togglePassword.addEventListener("click", function () {
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        this.classList.toggle("bx-show");
+      });
+
+      const form = document.querySelector("#signupForm");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('user').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('pass').value;
+
+        if (username === '' || email === '' || password === '') {
+          alert('Please fill in all fields');
+        } else {
+          alert(`Account created for ${username}`);
+          // Add your signup logic here
+        }
+      });
+    });
+
+    function checkPasswordStrength(password) {
+      const passwordStrength = document.getElementById('passwordStrength');
+      const weakRegex = /^(?=.*[a-z]).{5,}$/;
+      const mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+      const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*]).{8,}$/;
+
+      if (strongRegex.test(password)) {
+        passwordStrength.textContent = 'Strong Password';
+        passwordStrength.style.color = 'green';
+      } else if (mediumRegex.test(password)) {
+        passwordStrength.textContent = 'Medium Password';
+        passwordStrength.style.color = 'orange';
+      } else if (weakRegex.test(password)) {
+        passwordStrength.textContent = 'Weak Password';
+        passwordStrength.style.color = 'red';
+      } else {
+        passwordStrength.textContent = '';
+      }
+    }
+  </script>
+  <script type="module" src="../Script/signup.js"></script>
+</body>
+
+</html>

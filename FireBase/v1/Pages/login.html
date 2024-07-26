@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- coding by Gogila._ -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form | @Gogila._</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="../Styling/login.css">
+
+ 
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="login-box">
+      <div class="login-header">
+        <span>Login</span>
+      </div>
+      <div class="input_box">
+        <input type="text" id="user" class="input-field" required>
+        <label for="user" class="label">Username</label>
+        <i class="bx bx-user icon"></i>
+      </div>
+      <div class="input_box">
+        <input type="password" id="pass" class="input-field" required oninput="checkPasswordStrength(this.value)">
+        <label for="pass" class="label">Password</label>
+        <i class="bx bx-lock-alt icon" id="togglePassword"></i>
+      </div>
+      <div id="passwordStrength" class="password-strength"></div>
+
+      <div class="remember-forgot">
+        <div class="remember-me">
+          <input type="checkbox" id="remember">
+          <label for="remember"> Remember me </label>
+        </div>
+        <div class="forgot">
+          <a href="#">Forgot password ?</a>
+        </div>
+      </div>
+      <div class="input_box">
+        <input type="submit" class="input-submit" value="Login" onclick="handleLogin()">
+      </div>
+      <div class="register">
+        <span>Don't have an account ? <a href="signup.html">Register</a></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="forgotPasswordModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
+      <h2>Forgot Password</h2>
+      <div class="input_box">
+        <input type="email" id="forgotEmail" class="input-field" required>
+        <label for="forgotEmail" class="label">Email</label>
+      </div>
+      <div class="input_box">
+        <input type="submit" class="input-submit" value="Submit" onclick="handleForgotPassword()">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#pass");
+
+    togglePassword.addEventListener("click", function () {
+      const type = password.getAttribute("type") === "password" ? "text" : "password";
+      password.setAttribute("type", type);
+      this.classList.toggle("bx-show");
+    });
+
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+
+    function handleForgotPassword() {
+      const email = document.getElementById('forgotEmail').value;
+      if (email) {
+        alert(`Password reset link has been sent to ${email}`);
+        closeModal('forgotPasswordModal');
+      } else {
+        alert('Please enter your email');
+      }
+    }
+
+    function checkPasswordStrength(password) {
+      const passwordStrength = document.getElementById('passwordStrength');
+      const weakRegex = /^(?=.*[a-z]).{5,}$/;
+      const mediumRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+      const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%\^&\*]).{8,}$/;
+
+      if (strongRegex.test(password)) {
+        passwordStrength.textContent = 'Strong Password';
+        passwordStrength.style.color = 'green';
+      } else if (mediumRegex.test(password)) {
+        passwordStrength.textContent = 'Medium Password';
+        passwordStrength.style.color = 'orange';
+      } else if (weakRegex.test(password)) {
+        passwordStrength.textContent = 'Weak Password';
+        passwordStrength.style.color = 'red';
+      } else {
+        passwordStrength.textContent = '';
+      }
+    }
+
+    function handleLogin() {
+      const username = document.getElementById('user').value;
+      const password = document.getElementById('pass').value;
+
+      if (username === '' || password === '') {
+        alert('Please fill in all fields');
+      } else {
+        alert(`Logged in as ${username}`);
+        // Add your login logic here
+      }
+    }
+  </script>
+<script type="module" src="../Script/login.js">
+
+</script>
+</body>
+
+</html>
