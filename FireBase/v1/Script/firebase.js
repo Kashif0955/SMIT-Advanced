@@ -8,6 +8,7 @@ import { getAuth,
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
+<<<<<<< HEAD
     apiKey: "AIzaSyCNthFQsYVKjQnBVmrbOggwhFtMXX1oqb4",
   authDomain: "my-projects-fbf1b.firebaseapp.com",
   projectId: "my-projects-fbf1b",
@@ -15,6 +16,9 @@ const firebaseConfig = {
   messagingSenderId: "389373121088",
   appId: "1:389373121088:web:4a31f2b930f6932c59c5a5",
   measurementId: "G-GY4JXYJWER"
+=======
+   
+>>>>>>> 740a9e55250d4ea682c0f9db5ef61a96f106b60b
 };
 
 // Initialize Firebase
