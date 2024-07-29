@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             const result = await createUserWithEmailAndPassword(auth, email, password);
-    
+            window.location = "./dashboard.html";
+            
             // Log data to console
             // console.log("Username:", username);
             // console.log("Email:", email);

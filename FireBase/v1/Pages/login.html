@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- coding by Gogila._ -->
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Form | @Gogila._</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="../Styling/login.css">
-
- 
+  <link rel="stylesheet" href="../Styling/login.css">
 </head>
-
 <body>
   <div class="wrapper">
+    <div id="msg"></div>
     <div class="login-box">
       <div class="login-header">
         <span>Login</span>
       </div>
-      <div class="input_box">
-        <input type="text" id="user" class="input-field" required>
-        <label for="user" class="label">Username</label>
-        <i class="bx bx-user icon"></i>
-      </div>
-      <div class="input_box">
-        <input type="password" id="pass" class="input-field" required oninput="checkPasswordStrength(this.value)">
-        <label for="pass" class="label">Password</label>
-        <i class="bx bx-lock-alt icon" id="togglePassword"></i>
-      </div>
-      <div id="passwordStrength" class="password-strength"></div>
-
-      <div class="remember-forgot">
-        <div class="remember-me">
-          <input type="checkbox" id="remember">
-          <label for="remember"> Remember me </label>
+      <form id="login-form">
+        <div class="input_box">
+          <input type="email" id="user" class="input-field" required>
+          <label for="user" class="label">Email</label>
+          <i class="bx bx-user icon"></i>
         </div>
-        <div class="forgot">
-          <a href="#">Forgot password ?</a>
+        <div class="input_box">
+          <input type="password" id="pass" class="input-field" required oninput="checkPasswordStrength(this.value)">
+          <label for="pass" class="label">Password</label>
+          <i class="bx bx-lock-alt icon" id="togglePassword"></i>
         </div>
-      </div>
-      <div class="input_box">
-        <input type="submit" class="input-submit" value="Login" onclick="handleLogin()">
-      </div>
-      <div class="register">
-        <span>Don't have an account ? <a href="signup.html">Register</a></span>
-      </div>
+        <div id="passwordStrength" class="password-strength"></div>
+        <div class="remember-forgot">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember"> Remember me </label>
+          </div>
+          <div class="forgot">
+            <a href="#" onclick="openModal('forgotPasswordModal')">Forgot password?</a>
+          </div>
+        </div>
+        <div class="input_box">
+          <input type="submit" class="input-submit" value="Login">
+        </div>
+        <div class="register">
+          <span>Don't have an account? <a href="signup.html">Register</a></span>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -65,6 +62,8 @@
   <script>
     const togglePassword = document.querySelector("#togglePassword");
     const password = document.querySelector("#pass");
+    const form = document.querySelector("#login-form");
+    const msgDiv = document.querySelector("#msg");
 
     togglePassword.addEventListener("click", function () {
       const type = password.getAttribute("type") === "password" ? "text" : "password";
@@ -110,21 +109,30 @@
       }
     }
 
-    function handleLogin() {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      msgDiv.innerText = "loading...";
+
       const username = document.getElementById('user').value;
       const password = document.getElementById('pass').value;
 
-      if (username === '' || password === '') {
-        alert('Please fill in all fields');
-      } else {
-        alert(`Logged in as ${username}`);
-        // Add your login logic here
+      if (!username || !password) {
+        msgDiv.innerText = "Please fill in all fields";
+        return;
       }
-    }
+
+      try {
+        // Replace with your actual Firebase sign-in logic
+        const result = await signInWithEmailAndPassword(auth, username, password);
+
+        window.location = "./dashboard.html";
+        console.log("result ", result);
+      } catch (error) {
+        msgDiv.innerText = error.message || "An error occurred";
+        console.log("my error msg", error.message);
+      }
+    });
   </script>
-<script type="module" src="../Script/login.js">
-
-</script>
+  <script type="module" src="../Script/login.js"></script>
 </body>
-
 </html>
